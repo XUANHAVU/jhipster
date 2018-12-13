@@ -1,0 +1,112 @@
+<div>
+    <h2>Students</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4">
+                <button class="btn btn-primary" ui-sref="student.new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span>
+                        Create new Student
+                    </span>
+                </button>
+            </div>
+            <div class="col-4">
+                <form name="searchForm">
+                    <input type="text" class="search_3" ng-model="vm.searchText" ng-change="vm.change()"
+                           placeholder="Nhập tên học sinh bạn muốn tìm?"/>
+                    <!--<input type="submit" class="submit_3" value="Search" ng-disabled="vm.isSaving"/>-->
+                </form>
+            </div>
+            <div class="col-4">
+                <!--<form name="searchForm2">-->
+                <!--<input type="text" class="search_3" ng-model="vm.searchText2" ng-change="vm.change2()"-->
+                <!--placeholder="Nhập tên lớp bạn muốn tìm?"/>-->
+                <!--&lt;!&ndash;<input type="submit" class="submit_3" value="Search" ng-disabled="vm.isSaving"/>&ndash;&gt;-->
+                <!--</form>-->
+
+                <form name="searchForm2">
+                    <label for="repeatSelect"> Search Class: </label>
+                    <select name="repeatSelect" id="repeatSelect" ng-model="vm.searchText2" ng-change="vm.search2()">
+                        <option ng-repeat="option in vm.lops" value="{{option.id}}">{{option.name_class}}</option>
+                    </select>
+                    <button type="submit"
+                            ng-click="vm.search2(null)"
+                            class="btn btn-danger btn-sm">
+                        <span class="glyphicon glyphicon-remove-circle"></span>
+                        <span class="hidden-sm-down"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+
+                <!--<div class="form-group">-->
+                <!--<input type="file" file-model="uploadedFile"/>-->
+                <!--<button ng-click="doUploadFile()">Upload</button>-->
+                <!--</div>-->
+                <form name="myForm">
+                    <div class="form-group">
+                        <h3>Chọn File tải lên: fileName.xlsx</h3>
+                        <input class="btn btn-info" type="file" file-model="myFile" required/>
+                        <button class="btn btn-primary pull-left" ng-disabled="myForm.$invalid" ng-click="vm.uploadFile()">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+            <tr>
+                <th><span>ID</span></th>
+                <th><span>Name Student</span></th>
+                <th><span>Age Student</span></th>
+                <th><span>Class</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="student in vm.students track by student.id">
+                <td><a ui-sref="student-detail({id:student.id})">{{student.id}}</a></td>
+                <td>{{student.nameStudent}}</td>
+                <td>{{student.ageStudent}}</td>
+                <td>{{student.lopName}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+
+                        <button type="submit"
+                                ui-sref="student.delAStudent({id:student.id})"
+                                class="btn btn-warning btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="hidden-sm-down"></span>
+                        </button>
+
+                        <button type="submit"
+                                ui-sref="student-detail({id:student.id})"
+                                class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                            <span class="hidden-sm-down"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="student.edit({id:student.id})"
+                                class="btn btn-primary btn-sm">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                            <span class="hidden-sm-down"></span>
+                        </button>
+                        <button type="submit"
+                                ui-sref="student.delete({id:student.id})"
+                                class="btn btn-danger btn-sm">
+                            <span class="glyphicon glyphicon-remove-circle"></span>
+                            <span class="hidden-sm-down"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
